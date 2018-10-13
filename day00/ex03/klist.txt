@@ -1,0 +1,2 @@
+klist: No ticket file: /tmp/krb5cc_1000
+kinit: krb5_get_init_creds: CLIENT_NOT_FOUND
