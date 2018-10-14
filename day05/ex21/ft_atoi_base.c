@@ -1,4 +1,4 @@
-#include	<stdio.h>
+// #include	<stdio.h>
 
 int		ft_compare_base(char c, char *base)
 {
@@ -31,17 +31,11 @@ int		ft_checkstr(char *str, char *base)
 	flag = 0;
 	while (str[++n])
 		if (!((str[n] == 32 || (str[n] >= 9 && str[n] <= 13))
-			|| ft_compare_base(str[n], base)
+			|| (ft_compare_base(str[n], base) != -1)
 			|| (str[n] == '-') || (str[n] == '+')))
 			return (0);
 		else if ((str[n] == '-') || (str[n] == '+'))
 			flag = 1;
-	n = -1;
-	while (str[++n])
-	{
-		putchar(str[n]);
-		printf ("(%d-%d)\n", ft_compare_base(str[n], base), n);
-	}
 	return (--n - flag);
 }
 
@@ -73,21 +67,19 @@ int		ft_atoi_base(char *str, char *base)
 		flag = -1;
 	if ((str[n] == '-') || (str[n] == '+'))
 		n++;
-	printf("%d\n", ft_compare_base(str[n], base));
 	while (ft_compare_base(str[n], base) != -1)
 	{
-		printf("%d\n", ft_compare_base(str[n], base) * ft_iterative_power(ft_strlen(base), power));
 		sum += ft_compare_base(str[n], base) * ft_iterative_power(ft_strlen(base), power--);
 		n++;
 	}
 	return (sum * flag);
 }
 
-int		main(void)
-{
+// int		main(void)
+// {
 // 	printf("%d=15\n", ft_atoi_base("15", "0123456789"));
 // 	printf("%d=63\n", ft_atoi_base("3f", "0123456789abcdef"));
-	printf("%d=1\n", ft_atoi_base("a", "0a"));
+// 	// printf("%d=1\n", ft_atoi_base("a", "0a")); надо найти баг
 // 	printf("%d=-15\n", ft_atoi_base("-15", "0123456789"));
 // 	printf("%d=-7\n", ft_atoi_base("-111", "01"));
 // 	printf("%d=0\n", ft_atoi_base("a", "0"));
@@ -95,5 +87,5 @@ int		main(void)
 // 	printf("%d=0\n", ft_atoi_base("1", "01234+"));
 // 	printf("%d=0\n", ft_atoi_base("5", "01234"));
 // 	printf("%d=0\n", ft_atoi_base("", "01234"));
-	return (0);
-}
+// 	return (0);
+// }

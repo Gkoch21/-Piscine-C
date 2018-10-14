@@ -1,10 +1,5 @@
-// #include 	<stdio.h>
 #include	<unistd.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+// #include	<stdio.h>
 
 int		ft_strlen(char *str)
 {
@@ -31,12 +26,13 @@ void	ft_putnbr_base(int nbr, char *base)
 {
 	int n;
 
+	write(1, "\\", 1);
 	n = ft_strlen(base);
 	if	(n == 0 || (n == 1) || ft_str_is_printable(base))
 		return ;
 	if ((nbr < 0) && (nbr != 0) && ((nbr / n) != 0))
 	{
-		ft_putchar('-');
+		write(1, "-", 1);
 		ft_putnbr_base(nbr / n * -1, base);
 		nbr *= -1;
 	}
@@ -44,24 +40,28 @@ void	ft_putnbr_base(int nbr, char *base)
 		ft_putnbr_base(nbr / n, base);
 	if (nbr != 0 && ((nbr / n) == 0))
 		write(1, "0", 1);
-	ft_putchar(base[nbr % n]);
+	write(1, &base[nbr % n], 1);
+}
+
+void	ft_putstr_non_printable(char *str)
+{
+	int		n;
+
+	n = -1;
+	while (str[++n])
+		if (str[n] < 32 || str[n] >= 127)
+			ft_putnbr_base(str[n], "0123456789abcdef");
+		else
+			write(1, &str[n], 1);
 }
 
 // int		main(void)
 // {
-// 	ft_putnbr_base(40, "0123456789abcdef");
-// 	printf("=%d\n", 28);
-// 	ft_putnbr_base(31, "0123456789abcdef");
-// 	printf("=%s\n", "1f");
-// 	ft_putnbr_base(15, "01");
-// 	printf("=%s\n", "1111");
-// 	ft_putnbr_base(-15, "0123456789");
-// 	printf("=%s\n", "-15");
-// 	ft_putnbr_base(-16, "01");
-// 	printf("=%s\n", "-10000");
-// 	ft_putnbr_base(2147483647, "0123456789abcdef");
-// 	printf("=%s\n", "7fffffff");
-// 	ft_putnbr_base(-2147483648, "0123456789abcdef");
-// 	printf("=%s\n", "-80000000");
+// 	ft_putstr_non_printable("asdf\x7f\x1fhi\x01\xfflol");
+// 	write(1, "\n", 1);
+// 	ft_putstr_non_printable("asdf\n\x1fhi\e\tlol");
+// 	write(1, "\n", 1);
+// 	ft_putstr_non_printable("Coucou\ntu vas bien ?");
+// 	write(1, "\n", 1);
 // 	return (0);
 // }
