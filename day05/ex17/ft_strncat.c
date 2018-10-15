@@ -6,7 +6,6 @@ char		*ft_strncat(char *dest, char *src, int nb)
 	int		i;
 	int		j;
 
-	nb -= 1;
 	i = 0;
 	while (dest[i])
 		i++;

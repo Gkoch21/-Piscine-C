@@ -1,5 +1,4 @@
-// #include	<stdio.h>
-#include	<stdlib.h>
+#include	"ft_stock_par.h"
 
 int		ft_count_word(char *str)
 {
@@ -44,6 +43,8 @@ char	**ft_split_whitespaces(char *str)
 		while (((str[n] == '\t') || (str[n] == '\n') || (str[n] == ' ')) && str[n])
 			n++;
 		start = n;
+		if (!str[n])
+			return (&answer[0]);
 		while (!((str[n] == '\t') || (str[n] == '\n') || (str[n] == ' ')) && str[n])
 			n++;
 		answer[j] = (char*)malloc(sizeof(char) * (n - start + 1));
@@ -52,25 +53,3 @@ char	**ft_split_whitespaces(char *str)
 	answer[j] = NULL;
 	return (&answer[0]);
 }
-
-// int		main(void)
-// {
-// 	char	**str;
-// 	int		n;
-
-// 	str = ft_split_whitespaces(" NO YES ARG2 ARG3");
-// 	n = -1;
-// 	while(++n < 4)
-// 		printf("%s\n", str[n]);
-// 	printf("\n");
-
-// 	char** res;
-
-// 	for (res = ft_split_whitespaces("asdf qwerty zxcv"); *res != 0; res++)
-// 		printf("'%s',", *res);
-// 	printf("\n");
-// 	for (res = ft_split_whitespaces("s1   s2 \t\n\t\ns3"); *res != 0; res++)
-// 		printf("'%s',", *res);
-// 	printf("\n");
-// 	return (0);
-// }

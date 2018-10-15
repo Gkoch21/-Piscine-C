@@ -38,12 +38,9 @@ void	ft_putnbr_base(int nbr, char *base)
 	{
 		ft_putchar('-');
 		ft_putnbr_base(nbr / n * -1, base);
-		nbr *= -1;
 	}
 	else if (nbr != 0 && ((nbr / n) != 0))
 		ft_putnbr_base(nbr / n, base);
-	if (nbr != 0 && ((nbr / n) == 0))
-		write(1, "0", 1);
 	ft_putchar(base[nbr % n]);
 }
 

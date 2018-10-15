@@ -44,6 +44,8 @@ char	**ft_split_whitespaces(char *str)
 		while (((str[n] == '\t') || (str[n] == '\n') || (str[n] == ' ')) && str[n])
 			n++;
 		start = n;
+		if (!str[n])
+			return (&answer[0]);
 		while (!((str[n] == '\t') || (str[n] == '\n') || (str[n] == ' ')) && str[n])
 			n++;
 		answer[j] = (char*)malloc(sizeof(char) * (n - start + 1));
