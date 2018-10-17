@@ -4,6 +4,9 @@
 		"string.h": "c",
 		"stdlib.h": "c",
 		"ft_stock_par.h": "c",
-		"ft_perso.h": "c"
+		"ft_perso.h": "c",
+		"typeinfo": "c",
+		"ft_ultimate_fight.h": "c",
+		"ft.h": "c"
 	}
 }

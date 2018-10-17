@@ -20,10 +20,10 @@ void	ft_sort_params(int ac, char **av)
 	int		j;
 	char	*tmp;
 	
-	i = 0;
+	i = -1;
 	while (++i < ac)
 	{
-		j = 0;
+		j = -1;
 		while (++j < (ac -1))
 			if (ft_strcmp(av[j], av[j + 1]) > 0)
 			{
