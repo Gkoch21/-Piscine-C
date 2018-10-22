@@ -1,20 +1,20 @@
 // #include	<stdio.h>
 #include	"ft_list.h"
 
-// void	ft_list_push_back(t_list **begin_list, void *data)
-// {
-// 	t_list	*next;
+void	ft_list_push_back(t_list **begin_list, void *data)
+{
+	t_list	*next;
 	
-// 	next = *begin_list;
-// 	if (next)
-// 	{
-// 		while (next->next)
-// 			next = next->next;
-// 		next->next = ft_create_elem(data);
-// 	}
-// 	else
-// 		*begin_list = ft_create_elem(data);
-// }
+	next = *begin_list;
+	if (next)
+	{
+		while (next->next)
+			next = next->next;
+		next->next = ft_create_elem(data);
+	}
+	else
+		*begin_list = ft_create_elem(data);
+}
 
 // t_list *ft_list_push_params(int ac, char **av)
 // {
@@ -73,51 +73,27 @@
 // 	return (0);
 // }
 
-int		ft_list_size(t_list *begin_list)
+void	ft_sorted_list_insert(t_list **begin_list, void *data, int (*cmp)())
 {
-	t_list	*list;
-	int		count;
 
-	list = begin_list;
-	count = 0;
-	if (list)
+    t_list	*list;
+	char	*str;
+
+	str = NULL;
+	list = *begin_list;
+	ft_list_push_back(begin_list, data);
+	while (list->next)
 	{
-		count = 1;
-		while (list->next)
+		if ((*cmp)(list->data, (list->next)->data) > 0)
 		{
-			list = list->next;
-			count += 1;
+			str = list->data;
+			list->data = (list->next)->data;
+			(list->next)->data = str;
+			list = *begin_list;
 		}
+		else
+			list = list->next;
 	}
-	return (count);
-}
-
-void	ft_list_reverse_fun(t_list *begin_list)
-{
-	t_list	*a;
-	t_list	*b;
-	int		cur;
-	int		i;
-	void	*tmp;
-
-	a = begin_list;
-	b = NULL;
-	cur = ft_list_size(begin_list);
-	while (a != b)
-	{
-		b = begin_list;
-		i = 1;
-		while (i++ < cur)
-			b = b->next;
-		if (a == b)
-			break ;
-		tmp = a->data;
-		a->data = b->data;
-		b->data = tmp;
-		a = a->next ? a->next : a;
-		cur -= 1;
-	}
-	a = begin_list;
 }
 
 // int		main(int ac, char **av)
@@ -141,7 +117,9 @@ void	ft_list_reverse_fun(t_list *begin_list)
 // 	test2 = ft_list_push_params(4, str);
 // 	ft_putlist(test2);
 // 	printf("\n");
-// 	ft_list_reverse_fun(test);
+// 	ft_sorted_list_insert(&test, "5", ft_strcmp);
+// 	ft_sorted_list_insert(&test, "7", ft_strcmp);
+// 	ft_sorted_list_insert(&test, "0", ft_strcmp);
 // 	ft_putlist(test);
 // 	return (0);
 // }

@@ -73,51 +73,42 @@
 // 	return (0);
 // }
 
-int		ft_list_size(t_list *begin_list)
+void ft_list_merge(t_list **begin_list1, t_list *begin_list2)
 {
-	t_list	*list;
-	int		count;
+	t_list	*next;
 
-	list = begin_list;
-	count = 0;
-	if (list)
+	if (*begin_list1)
 	{
-		count = 1;
-		while (list->next)
-		{
-			list = list->next;
-			count += 1;
-		}
+		next = *begin_list1;
+		while (next->next)
+			next = next->next;
+		next->next = begin_list2;
 	}
-	return (count);
+	else
+		*begin_list1 = begin_list2;
 }
 
-void	ft_list_reverse_fun(t_list *begin_list)
+void ft_sorted_list_merge(t_list **begin_list1, t_list *begin_list2, int (*cmp)())
 {
-	t_list	*a;
-	t_list	*b;
-	int		cur;
-	int		i;
-	void	*tmp;
 
-	a = begin_list;
-	b = NULL;
-	cur = ft_list_size(begin_list);
-	while (a != b)
+    t_list	*list;
+	char	*str;
+
+	str = NULL;
+	ft_list_merge(begin_list1, begin_list2);
+	list = *begin_list1;
+	while (list->next)
 	{
-		b = begin_list;
-		i = 1;
-		while (i++ < cur)
-			b = b->next;
-		if (a == b)
-			break ;
-		tmp = a->data;
-		a->data = b->data;
-		b->data = tmp;
-		a = a->next ? a->next : a;
-		cur -= 1;
+		if ((*cmp)(list->data, (list->next)->data) > 0)
+		{
+			str = list->data;
+			list->data = (list->next)->data;
+			(list->next)->data = str;
+			list = *begin_list1;
+		}
+		else
+			list = list->next;
 	}
-	a = begin_list;
 }
 
 // int		main(int ac, char **av)
@@ -128,11 +119,11 @@ void	ft_list_reverse_fun(t_list *begin_list)
 	
 // 	str[0] = NULL;
 // 	str[1] = (char*)malloc(sizeof(char) * 5);
-// 	str[1] = "test\0";
+// 	str[1] = "7\0";
 // 	str[2] = (char*)malloc(sizeof(char) * 5);
-// 	str[2] = "test\0";
+// 	str[2] = "9\0";
 // 	str[3] = (char*)malloc(sizeof(char) * 5);
-// 	str[3] = "test\0";
+// 	str[3] = "6\0";
 
 // 	if (ac > 1)
 // 		test = ft_list_push_params(ac, av);
@@ -141,7 +132,7 @@ void	ft_list_reverse_fun(t_list *begin_list)
 // 	test2 = ft_list_push_params(4, str);
 // 	ft_putlist(test2);
 // 	printf("\n");
-// 	ft_list_reverse_fun(test);
+// 	ft_sorted_list_merge(&test, test2, ft_strcmp);
 // 	ft_putlist(test);
 // 	return (0);
 // }
