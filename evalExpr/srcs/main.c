@@ -40,7 +40,7 @@ int		btree_apply_prefix(t_eval *root)
 		return (root->intg);
 }
 
-t_eval	*create_oprt(char	t)
+t_eval	*	create_oprt(char	t)
 {
 	t_eval	*new;
 
